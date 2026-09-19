@@ -21,6 +21,12 @@ repositório privado.
   noite, a classe e a freguesia
 - **Gráficos por freguesia** (as 24 de Lisboa) e um gráfico que compara cada
   tipo de coberto com a cidade
+- **A ilha de calor ao longo das 24 horas**: cada passagem do satélite é um
+  ponto, à hora local a que foi feita, incluindo as do nascer e do pôr do sol
+  que os mapas deixam de fora. É um ciclo composto de muitos dias, não o de um
+  dia real
+- **A mesma curva por tipo de tecido urbano** (Local Climate Zones, mapa global
+  de Demuzere et al. 2022)
 - Três mapas de fundo: claro, escuro e satélite
 
 ## O resultado principal

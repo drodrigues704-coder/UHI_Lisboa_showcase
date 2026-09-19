@@ -29,6 +29,8 @@ async function readPoint(latlng) {
   const [stat, day, night] = await Promise.all([loadGrid("static"), loadGrid("day"), loadGrid("night")]);
   const parishId = bandValue(stat, cat.grids.bands.static, "parish_id", idx);
   const cover = bandValue(stat, cat.grids.bands.static, "cover", idx);
+  const lcz = cat.grids.bands.static.some((b) => b.name === "lcz")
+    ? bandValue(stat, cat.grids.bands.static, "lcz", idx) : null;
   if (!parishId) return { outside: true };
 
   const names = ["LST_C", "SUHI", "UTFVI", "COOL_FREQ", "LST_C_CLASS", "SUHI_CLASS", "UTFVI_CLASS"];
@@ -37,7 +39,7 @@ async function readPoint(latlng) {
     const bands = cat.grids.bands[period];
     values[period] = Object.fromEntries(names.map((n) => [n, bandValue(arr, bands, n, idx)]));
   }
-  return { outside: false, parishId, cover, values };
+  return { outside: false, parishId, cover, lcz: lcz || null, values };
 }
 
 function layerLegend(period, product) {
@@ -81,7 +83,9 @@ function renderDiagnostic(result, parishName) {
     return;
   }
   const grids = APP_STATE.catalog.grids;
-  const place = `<p class="diag-place">${parishName}<small>${grids.cover_labels[result.cover]}</small></p>`;
+  const lcz = result.lcz && grids.lcz_classes ? grids.lcz_classes[String(result.lcz)] : null;
+  const lczLine = lcz ? `<small>${lcz.short}, ${lcz.label.toLowerCase()}</small>` : "";
+  const place = `<p class="diag-place">${parishName}<small>${grids.cover_labels[result.cover]}</small>${lczLine}</p>`;
   if (result.cover === grids.cover_codes.water) {
     body.innerHTML = `${place}<p class="hint">A água é excluída dos cálculos.</p>`;
     return;
@@ -101,5 +105,5 @@ function renderDiagnostic(result, parishName) {
         <td>${cellHtml("day", key, result.values.day, result.cover)}</td>
         <td>${cellHtml("night", key, result.values.night, result.cover)}</td></tr>`).join("")}
       </tbody>
-    </table>`;
+    </table>${lcz && lczRangeText(result.lcz) ? `<p class="hint diag-lcz">${lczRangeText(result.lcz)}</p>` : ""}`;
 }

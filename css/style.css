@@ -57,7 +57,7 @@ html, body {
 }
 .panel-head { flex: none; }
 
-.tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.25rem; margin-top: 0.75rem; }
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.25rem; margin-top: 0.75rem; }
 .tabs button {
   font: inherit; font-size: 0.85rem; font-weight: 600;
   min-height: 44px; padding: 0.35rem 0.25rem;
@@ -72,6 +72,9 @@ html, body {
 /* o separador Coberto tem 4 barras, não 24 freguesias: não precisa da altura
    mínima dos outros, e assim o texto de leitura cabe sem obrigar a scroll */
 #panel-cover .chart-wrap { min-height: 200px; }
+#panel-diurnal .chart-wrap { min-height: 300px; }
+#panel-lcz .chart-wrap { min-height: 400px; }   /* a legenda de 6 zonas ocupa ~110 px */
+.diag-lcz { margin-top: 0.4rem; }
 
 /* --- Cabeçalho: muda com o período -------------------------------------- */
 

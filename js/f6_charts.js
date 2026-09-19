@@ -5,6 +5,8 @@ const CHARTS = { order: [], suhi: null, utfvi: null, cool: null, cover: null };
 /* Dica do painel: o separador "Coberto" não é por freguesia. */
 const CHART_HINTS = {
   "tab-cover": "Mediana de cada passagem do satélite, por tipo de coberto. Floresta, matos e agricultura são o campo à volta de Lisboa, que serve de referência; o verde de Lisboa é Monsanto e os outros parques.",
+  "tab-diurnal": "Lisboa inteira face ao campo envolvente, passagem a passagem, pela hora local a que o satélite passou.",
+  "tab-lcz": "Cada tipo de tecido urbano de Lisboa face ao campo envolvente, mediana a cada 2 horas.",
   default: "Mediana sobre a área terrestre de cada freguesia. A freguesia do ponto selecionado fica destacada.",
 };
 
@@ -78,6 +80,8 @@ function initCharts(stats) {
   });
 
   initCoverChart();
+  initDiurnalChart();
+  initLczChart();
   updatePeriodCharts();
 }
 
@@ -194,6 +198,7 @@ function initChartTabs() {
   const charts = {
     "tab-suhi": () => CHARTS.suhi, "tab-utfvi": () => CHARTS.utfvi,
     "tab-cool": () => CHARTS.cool, "tab-cover": () => CHARTS.cover,
+    "tab-diurnal": () => DIURNAL.chart, "tab-lcz": () => DIURNAL.lcz,
   };
   const hint = document.getElementById("charts-hint");
   const select = (tab, focus) => {
@@ -228,4 +233,5 @@ function highlightChartsParish() {
   for (const chart of [CHARTS.suhi, CHARTS.utfvi, CHARTS.cool]) {
     if (chart) chart.update();
   }
+  highlightLcz();
 }

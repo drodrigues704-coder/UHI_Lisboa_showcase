@@ -49,6 +49,7 @@ const APP_STATE = {
   product: APP_CONFIG.defaultProduct,
   point: null,          // {lat, lng}
   parishId: null,       // freguesia do ponto selecionado
+  lcz: null,            // Local Climate Zone do ponto selecionado (1–17)
 };
 
 function dataUrl(path) {

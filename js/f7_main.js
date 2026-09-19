@@ -95,6 +95,11 @@ function fillCatalogText() {
   set("txt-day-range", suhiRange(cat.summary.day.SUHI_land));
   set("txt-night-range", suhiRange(cat.summary.night.SUHI_land));
   set("txt-cos-source", cat.parameters.landcover_source);
+  if (cat.diurnal) {
+    const n = cat.diurnal.n_scenes_by_period;
+    set("txt-n-transition", String((n.dawn || 0) + (n.dusk || 0)));
+  }
+  if (cat.parameters.lcz_min_pixels) set("txt-lcz-minpx", fmtNumber(cat.parameters.lcz_min_pixels, 0));
 
   const band = cat.parameters.reference_elev_band_m;
   if (band) {
@@ -168,10 +173,12 @@ async function onMapClick(latlng) {
 
   if (error) {
     APP_STATE.parishId = null;
+    APP_STATE.lcz = null;
     document.getElementById("diag-body").innerHTML =
       `<p class="hint">Não foi possível ler os valores deste ponto (${error.message}). Clica de novo.</p>`;
   } else {
     APP_STATE.parishId = result.outside ? null : result.parishId;
+    APP_STATE.lcz = result.outside ? null : result.lcz;
     renderDiagnostic(result, result.outside ? "" : parishName(result.parishId));
   }
   if (UI.freguesias) highlightParish(UI.freguesias, APP_STATE.parishId);

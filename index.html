@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=28">
+<link rel="stylesheet" href="css/style.css?v=29">
 </head>
 <body data-period="day">
 
@@ -49,7 +49,7 @@
           <li>Escolhe <strong>Dia</strong> ou <strong>Noite</strong>.</li>
           <li>Escolhe a camada: ilha de calor, stress térmico, refúgios térmicos ou temperatura da superfície.</li>
           <li>Clica no mapa para ver os valores desse ponto nos dois períodos.</li>
-          <li>Usa os separadores dos gráficos para comparar as freguesias.</li>
+          <li>Usa os separadores dos gráficos para comparar as freguesias, ver a ilha de calor ao longo das 24 horas e por tipo de tecido urbano.</li>
         </ol>
       </details>
 
@@ -74,6 +74,7 @@
           <li>A ISS passa a horas diferentes em cada dia, por isso o dia (sol acima de <span id="txt-sun-min">…</span>°) e a noite (sol abaixo de <span id="txt-sun-night">…</span>°) são tratados em separado e os mapas juntam vários anos. Não há mapas por ano.</li>
           <li>De dia a diferença para o campo muda ao longo do dia: <span id="txt-hours-day">…</span>. A diferença cresce ao longo do dia, à medida que o restolho seco do campo aquece mais depressa do que a cidade. O mapa de dia junta as três horas.</li>
           <li>De noite a ilha de calor cresce pela madrugada fora: <span id="txt-hours-night">…</span>.</li>
+          <li>Um valor a uma só hora não representa o dia inteiro: às 23h e às 5h a ilha de calor não é a mesma. O separador <em>24 horas</em> junta todas as passagens pela hora a que foram feitas, incluindo as <span id="txt-n-transition">…</span> do nascer e do pôr do sol, que os mapas deixam de fora por estarem a meio da transição. Cada passagem é de um dia diferente, por isso a curva é um ciclo composto e não o de um dia real (Liu et al., 2025; Chang et al., 2021).</li>
           <li>Lisboa não tem campo dentro dos seus limites, nem os concelhos à volta, onde o verde está sempre encostado a construção. A referência são <span id="txt-ref-pixels">…</span> pontos de campo a pelo menos <span data-ref-mindist>…</span> km de áreas construídas densas (mediana <span id="txt-ref-meddist">…</span> km), quase todos na Lezíria do Tejo.</li>
           <li>A Lezíria fica mais baixa do que Lisboa e de noite arrefece mais. A temperatura do campo é por isso calculada por faixas de altitude de 10 m, pesadas como a cidade (<span id="txt-ref-band">…</span> m). <span id="txt-elev-corr">…</span></li>
           <li>Com o campo tão longe, a faixa do satélite muitas vezes cobre Lisboa mas não a Lezíria. Por isso o dia assenta em <span id="txt-n-day">…</span> passagens e a noite em <span id="txt-n-night">…</span>: menos do que com uma referência mais perto, mas sem a contaminação da cidade.</li>
@@ -82,8 +83,9 @@
           <li>Coberto do solo da <span id="txt-cos-source">…</span> (Carta de Uso e Ocupação do Solo, DGT), unidade mínima 0,45 ha, agregada para a grelha de 70 m. Urbano é 70% ou mais de território artificializado, onde entram os espaços verdes urbanos; a referência é 70% ou mais de vegetação não urbana. A faixa de transição entre as duas fica fora das estatísticas, mas continua a aparecer no mapa.</li>
           <li>Nuvens pequenas que a máscara do produto não deteta são removidas por comparação com o comportamento habitual de cada ponto. <span id="txt-day-missing"></span></li>
           <li>Os mapas da ilha de calor de dia e de noite têm escalas de cores diferentes, porque os valores quase não se tocam: de dia vão de <span id="txt-day-range">…</span>, de noite de <span id="txt-night-range">…</span> (5% a 95% da área). Para comparar os dois períodos usa os gráficos, que têm o mesmo eixo.</li>
+          <li>Tipos de tecido urbano: Local Climate Zones do mapa global de Demuzere et al. (2022), a 100 m. Só entram zonas com pelo menos <span id="txt-lcz-minpx">…</span> píxeis de 70 m em Lisboa.</li>
           <li>Limites administrativos: CAOP 2021 (DGT), igual à CAOP 2025 para Lisboa.</li>
-          <li>Créditos: ECOSTRESS (NASA JPL, LP DAAC/AppEEARS), COS, CAOP e MDT 25 m (DGT), mapas de fundo Esri (claro, escuro e satélite).</li>
+          <li>Créditos: ECOSTRESS (NASA JPL, LP DAAC/AppEEARS), COS, CAOP e MDT 25 m (DGT), LCZ (WUDAPT, Demuzere et al. 2022), mapas de fundo Esri (claro, escuro e satélite).</li>
         </ul>
       </details>
     </section>
@@ -101,6 +103,8 @@
         <button type="button" role="tab" id="tab-utfvi" aria-controls="panel-utfvi" aria-selected="false" tabindex="-1">Stress térmico</button>
         <button type="button" role="tab" id="tab-cool" aria-controls="panel-cool" aria-selected="false" tabindex="-1">Refúgios</button>
         <button type="button" role="tab" id="tab-cover" aria-controls="panel-cover" aria-selected="false" tabindex="-1">Coberto</button>
+        <button type="button" role="tab" id="tab-diurnal" aria-controls="panel-diurnal" aria-selected="false" tabindex="-1">24 horas</button>
+        <button type="button" role="tab" id="tab-lcz" aria-controls="panel-lcz" aria-selected="false" tabindex="-1">Zonas LCZ</button>
       </div>
     </div>
 
@@ -122,17 +126,30 @@
       <div class="chart-wrap"><canvas id="chart-cover"></canvas></div>
       <p class="hint" id="chart-cover-note"></p>
     </section>
+    <section class="tab-panel" role="tabpanel" id="panel-diurnal" aria-labelledby="tab-diurnal" tabindex="0" hidden>
+      <h3 class="chart-title">Ilha de calor ao longo das 24 horas</h3>
+      <p class="hint" id="chart-diurnal-lead"></p>
+      <div class="chart-wrap"><canvas id="chart-diurnal"></canvas></div>
+      <p class="hint" id="chart-diurnal-note"></p>
+    </section>
+    <section class="tab-panel" role="tabpanel" id="panel-lcz" aria-labelledby="tab-lcz" tabindex="0" hidden>
+      <h3 class="chart-title">Ilha de calor por tipo de tecido urbano (LCZ)</h3>
+      <p class="hint" id="chart-lcz-lead"></p>
+      <div class="chart-wrap"><canvas id="chart-lcz"></canvas></div>
+      <p class="hint" id="chart-lcz-note"></p>
+    </section>
   </aside>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="js/f1_config.js?v=28"></script>
-<script src="js/f2_api.js?v=28"></script>
-<script src="js/f3_map.js?v=28"></script>
-<script src="js/f4_legend.js?v=28"></script>
-<script src="js/f5_diagnostic.js?v=28"></script>
-<script src="js/f6_charts.js?v=28"></script>
-<script src="js/f7_main.js?v=28"></script>
+<script src="js/f1_config.js?v=29"></script>
+<script src="js/f2_api.js?v=29"></script>
+<script src="js/f3_map.js?v=29"></script>
+<script src="js/f4_legend.js?v=29"></script>
+<script src="js/f5_diagnostic.js?v=29"></script>
+<script src="js/f6_charts.js?v=29"></script>
+<script src="js/f8_diurnal.js?v=29"></script>
+<script src="js/f7_main.js?v=29"></script>
 </body>
 </html>
