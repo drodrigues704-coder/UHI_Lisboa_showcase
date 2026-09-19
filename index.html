@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calor à superfície em Lisboa</title>
+<meta name="description" content="Ilhas de calor urbano de superfície em Lisboa, de dia e de noite, a partir de dados térmicos ECOSTRESS (2018–2025).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%231c2b3a'/%3E%3Cpath d='M16 3a13 13 0 0 1 0 26z' fill='%23e3a33b'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css?v=28">
+</head>
+<body data-period="day">
+
+<div id="app">
+  <aside id="sidebar" aria-label="Controlos e informação">
+
+    <header id="masthead">
+      <h1>Calor à superfície em Lisboa</h1>
+      <p id="masthead-sub">Quando é que Lisboa fica mais quente do que o campo à sua volta, e quando fica mais fresca. Verões de <span data-cat="years">…</span>, satélite ECOSTRESS.</p>
+      <div id="period-switch" role="group" aria-label="Período do dia">
+        <button type="button" data-period="day" aria-pressed="true">Dia</button>
+        <button type="button" data-period="night" aria-pressed="false">Noite</button>
+      </div>
+      <p id="period-note"></p>
+    </header>
+
+    <p id="app-error" class="app-error" role="alert"></p>
+
+    <section class="block" id="layer-block">
+      <label for="ctl-product" class="block-title">Camada no mapa</label>
+      <select id="ctl-product"></select>
+      <p id="layer-status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section class="block" id="diag-block" aria-live="polite">
+      <h2 class="block-title">Ponto selecionado</h2>
+      <div id="diag-body">
+        <p class="hint">Clica no mapa para ver os valores desse ponto, de dia e de noite.</p>
+      </div>
+    </section>
+
+    <section class="block info">
+      <details>
+        <summary>Como utilizar</summary>
+        <ol>
+          <li>Escolhe <strong>Dia</strong> ou <strong>Noite</strong>.</li>
+          <li>Escolhe a camada: ilha de calor, stress térmico, refúgios térmicos ou temperatura da superfície.</li>
+          <li>Clica no mapa para ver os valores desse ponto nos dois períodos.</li>
+          <li>Usa os separadores dos gráficos para comparar as freguesias.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Conceitos</summary>
+        <dl>
+          <dt>Temperatura da superfície (LST)</dt>
+          <dd>Temperatura do chão, dos telhados e da vegetação medida pelo satélite no infravermelho térmico. Não é a temperatura do ar: num dia de verão o asfalto pode estar 10 a 20 °C acima do ar.</dd>
+          <dt>Ilha de calor de superfície (SUHI)</dt>
+          <dd>Quantos graus um ponto está acima do campo à volta de Lisboa na mesma passagem do satélite. O campo é sobretudo agricultura e floresta da Lezíria do Tejo, a mais de <span id="txt-ref-mindist">…</span> km de áreas construídas densas. Calcula-se passagem a passagem e o mapa mostra a mediana. <strong>Valores negativos querem dizer que a cidade está mais fresca do que o campo</strong>, o que de dia acontece em <span id="txt-neg-share">…</span> de Lisboa. O separador <em>Coberto</em> mostra porquê.</dd>
+          <dt>Stress térmico (UTFVI)</dt>
+          <dd>Desvio relativo de cada ponto face à temperatura média da cidade nessa passagem, (LST − média) / LST, em Kelvin. Classes de Zhang et al.: sem ilha de calor (&lt; 0), fraca, média, forte, mais forte e muito forte (&gt; <span id="txt-utfvi-max">…</span>).</dd>
+          <dt>Refúgios térmicos</dt>
+          <dd>Pontos urbanos mais de <span id="txt-cool-delta">…</span> °C abaixo da mediana urbana em pelo menos <span id="txt-cool-freq">…</span>% das passagens. Costumam ser parques, jardins e ruas arborizadas.</dd>
+        </dl>
+      </details>
+
+      <details>
+        <summary>Dados e limitações</summary>
+        <ul id="limitations">
+          <li>Temperatura da superfície do ECOSTRESS (produto L2T LSTE v002, 70 m), a bordo da Estação Espacial Internacional. Meses de <span id="txt-months">…</span>, <span data-cat="years">…</span>.</li>
+          <li>A ISS passa a horas diferentes em cada dia, por isso o dia (sol acima de <span id="txt-sun-min">…</span>°) e a noite (sol abaixo de <span id="txt-sun-night">…</span>°) são tratados em separado e os mapas juntam vários anos. Não há mapas por ano.</li>
+          <li>De dia a diferença para o campo muda ao longo do dia: <span id="txt-hours-day">…</span>. A diferença cresce ao longo do dia, à medida que o restolho seco do campo aquece mais depressa do que a cidade. O mapa de dia junta as três horas.</li>
+          <li>De noite a ilha de calor cresce pela madrugada fora: <span id="txt-hours-night">…</span>.</li>
+          <li>Lisboa não tem campo dentro dos seus limites, nem os concelhos à volta, onde o verde está sempre encostado a construção. A referência são <span id="txt-ref-pixels">…</span> pontos de campo a pelo menos <span data-ref-mindist>…</span> km de áreas construídas densas (mediana <span id="txt-ref-meddist">…</span> km), quase todos na Lezíria do Tejo.</li>
+          <li>A Lezíria fica mais baixa do que Lisboa e de noite arrefece mais. A temperatura do campo é por isso calculada por faixas de altitude de 10 m, pesadas como a cidade (<span id="txt-ref-band">…</span> m). <span id="txt-elev-corr">…</span></li>
+          <li>Com o campo tão longe, a faixa do satélite muitas vezes cobre Lisboa mas não a Lezíria. Por isso o dia assenta em <span id="txt-n-day">…</span> passagens e a noite em <span id="txt-n-night">…</span>: menos do que com uma referência mais perto, mas sem a contaminação da cidade.</li>
+          <li>Usar as áreas verdes de Lisboa como referência, como é habitual, dá o resultado ao contrário: <span id="txt-ref-compare">…</span>. Monsanto está rodeado de cidade: de dia é mais fresco do que o campo, e de noite quase não arrefece. Parecia uma ilha de calor diurna, e escondia a noturna.</li>
+          <li>O stress térmico (UTFVI) e os refúgios térmicos comparam cada ponto com o resto de Lisboa, não com o campo. Por isso um ponto pode estar mais fresco do que o campo e, ainda assim, em stress térmico face à cidade.</li>
+          <li>Coberto do solo da <span id="txt-cos-source">…</span> (Carta de Uso e Ocupação do Solo, DGT), unidade mínima 0,45 ha, agregada para a grelha de 70 m. Urbano é 70% ou mais de território artificializado, onde entram os espaços verdes urbanos; a referência é 70% ou mais de vegetação não urbana. A faixa de transição entre as duas fica fora das estatísticas, mas continua a aparecer no mapa.</li>
+          <li>Nuvens pequenas que a máscara do produto não deteta são removidas por comparação com o comportamento habitual de cada ponto. <span id="txt-day-missing"></span></li>
+          <li>Os mapas da ilha de calor de dia e de noite têm escalas de cores diferentes, porque os valores quase não se tocam: de dia vão de <span id="txt-day-range">…</span>, de noite de <span id="txt-night-range">…</span> (5% a 95% da área). Para comparar os dois períodos usa os gráficos, que têm o mesmo eixo.</li>
+          <li>Limites administrativos: CAOP 2021 (DGT), igual à CAOP 2025 para Lisboa.</li>
+          <li>Créditos: ECOSTRESS (NASA JPL, LP DAAC/AppEEARS), COS, CAOP e MDT 25 m (DGT), mapas de fundo Esri (claro, escuro e satélite).</li>
+        </ul>
+      </details>
+    </section>
+
+  </aside>
+
+  <main id="map" aria-label="Mapa de Lisboa"></main>
+
+  <aside id="charts-panel" aria-label="Gráficos por freguesia">
+    <div class="panel-head">
+      <h2 class="block-title">Comparar</h2>
+      <p class="hint" id="charts-hint">Mediana sobre a área terrestre de cada freguesia. A freguesia do ponto selecionado fica destacada.</p>
+      <div class="tabs" role="tablist" aria-label="Gráfico">
+        <button type="button" role="tab" id="tab-suhi" aria-controls="panel-suhi" aria-selected="true">Ilha de calor</button>
+        <button type="button" role="tab" id="tab-utfvi" aria-controls="panel-utfvi" aria-selected="false" tabindex="-1">Stress térmico</button>
+        <button type="button" role="tab" id="tab-cool" aria-controls="panel-cool" aria-selected="false" tabindex="-1">Refúgios</button>
+        <button type="button" role="tab" id="tab-cover" aria-controls="panel-cover" aria-selected="false" tabindex="-1">Coberto</button>
+      </div>
+    </div>
+
+    <section class="tab-panel" role="tabpanel" id="panel-suhi" aria-labelledby="tab-suhi" tabindex="0">
+      <h3 class="chart-title">Ilha de calor (SUHI), dia e noite</h3>
+      <div class="chart-wrap"><canvas id="chart-suhi"></canvas></div>
+    </section>
+    <section class="tab-panel" role="tabpanel" id="panel-utfvi" aria-labelledby="tab-utfvi" tabindex="0" hidden>
+      <h3 class="chart-title" id="chart-utfvi-title">Stress térmico (UTFVI), % da área</h3>
+      <div class="chart-wrap"><canvas id="chart-utfvi"></canvas></div>
+    </section>
+    <section class="tab-panel" role="tabpanel" id="panel-cool" aria-labelledby="tab-cool" tabindex="0" hidden>
+      <h3 class="chart-title" id="chart-cool-title">Refúgios térmicos, % da área urbana</h3>
+      <div class="chart-wrap"><canvas id="chart-cool"></canvas></div>
+    </section>
+    <section class="tab-panel" role="tabpanel" id="panel-cover" aria-labelledby="tab-cover" tabindex="0" hidden>
+      <h3 class="chart-title">Temperatura por tipo de coberto, face à mediana urbana</h3>
+      <p class="hint" id="chart-cover-lead"></p>
+      <div class="chart-wrap"><canvas id="chart-cover"></canvas></div>
+      <p class="hint" id="chart-cover-note"></p>
+    </section>
+  </aside>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="js/f1_config.js?v=28"></script>
+<script src="js/f2_api.js?v=28"></script>
+<script src="js/f3_map.js?v=28"></script>
+<script src="js/f4_legend.js?v=28"></script>
+<script src="js/f5_diagnostic.js?v=28"></script>
+<script src="js/f6_charts.js?v=28"></script>
+<script src="js/f7_main.js?v=28"></script>
+</body>
+</html>

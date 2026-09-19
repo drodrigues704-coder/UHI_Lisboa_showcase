@@ -1,0 +1,1062 @@
+{
+  "parameters": {
+    "utfvi_class_labels": [
+      "Sem ilha de calor",
+      "Fraca",
+      "Média",
+      "Forte",
+      "Mais forte",
+      "Muito forte"
+    ],
+    "area": "área geodésica por píxel; terra = sem água"
+  },
+  "municipio": {
+    "area_km2_grid": 99.997,
+    "land_km2": 85.876,
+    "cover_pct": {
+      "urbano": 69.0,
+      "verde": 11.9,
+      "agua": 14.1
+    },
+    "day": {
+      "lst_c_median": 36.61,
+      "suhi_median": -0.98,
+      "suhi_p90": 0.94,
+      "utfvi_median": 0.0007,
+      "utfvi_class_pct_land": [
+        44.1,
+        38.2,
+        14.6,
+        2.6,
+        0.5,
+        0.0
+      ],
+      "cool_island_pct_urban": 19.2
+    },
+    "night": {
+      "lst_c_median": 20.27,
+      "suhi_median": 2.64,
+      "suhi_p90": 3.1,
+      "utfvi_median": 0.0001,
+      "utfvi_class_pct_land": [
+        47.5,
+        52.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cool_island_pct_urban": 1.6
+    }
+  },
+  "freguesias": [
+    {
+      "parish_id": 1,
+      "dicofre": "110601",
+      "freguesia": "Ajuda",
+      "area_km2_grid": 2.873,
+      "land_km2": 2.873,
+      "cover_pct": {
+        "urbano": 57.6,
+        "verde": 33.4,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 36.5,
+        "suhi_median": -1.02,
+        "suhi_p90": 0.29,
+        "utfvi_median": 0.0009,
+        "utfvi_class_pct_land": [
+          46.5,
+          42.8,
+          10.7,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 7.9
+      },
+      "night": {
+        "lst_c_median": 19.97,
+        "suhi_median": 2.36,
+        "suhi_p90": 2.64,
+        "utfvi_median": -0.001,
+        "utfvi_class_pct_land": [
+          91.3,
+          8.7,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.2
+      }
+    },
+    {
+      "parish_id": 2,
+      "dicofre": "110602",
+      "freguesia": "Alcântara",
+      "area_km2_grid": 5.07,
+      "land_km2": 4.41,
+      "cover_pct": {
+        "urbano": 39.0,
+        "verde": 38.9,
+        "agua": 13.0
+      },
+      "day": {
+        "lst_c_median": 35.32,
+        "suhi_median": -2.22,
+        "suhi_p90": -0.13,
+        "utfvi_median": -0.0027,
+        "utfvi_class_pct_land": [
+          62.5,
+          32.1,
+          4.6,
+          0.7,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 20.2
+      },
+      "night": {
+        "lst_c_median": 20.03,
+        "suhi_median": 2.32,
+        "suhi_p90": 2.83,
+        "utfvi_median": -0.0011,
+        "utfvi_class_pct_land": [
+          77.1,
+          22.9,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 3,
+      "dicofre": "110607",
+      "freguesia": "Beato",
+      "area_km2_grid": 2.504,
+      "land_km2": 1.701,
+      "cover_pct": {
+        "urbano": 52.6,
+        "verde": 8.1,
+        "agua": 32.1
+      },
+      "day": {
+        "lst_c_median": 37.73,
+        "suhi_median": 0.0,
+        "suhi_p90": 1.02,
+        "utfvi_median": 0.0034,
+        "utfvi_class_pct_land": [
+          4.1,
+          69.5,
+          25.7,
+          0.7,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 2.0
+      },
+      "night": {
+        "lst_c_median": 20.25,
+        "suhi_median": 2.62,
+        "suhi_p90": 3.08,
+        "utfvi_median": -0.0002,
+        "utfvi_class_pct_land": [
+          56.7,
+          43.3,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 4,
+      "dicofre": "110608",
+      "freguesia": "Benfica",
+      "area_km2_grid": 8.036,
+      "land_km2": 8.036,
+      "cover_pct": {
+        "urbano": 44.1,
+        "verde": 48.5,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 34.87,
+        "suhi_median": -2.66,
+        "suhi_p90": -0.38,
+        "utfvi_median": -0.0042,
+        "utfvi_class_pct_land": [
+          72.8,
+          25.0,
+          2.2,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 23.4
+      },
+      "night": {
+        "lst_c_median": 19.87,
+        "suhi_median": 2.3,
+        "suhi_p90": 2.64,
+        "utfvi_median": -0.0009,
+        "utfvi_class_pct_land": [
+          83.4,
+          16.6,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 3.6
+      }
+    },
+    {
+      "parish_id": 5,
+      "dicofre": "110610",
+      "freguesia": "Campolide",
+      "area_km2_grid": 2.772,
+      "land_km2": 2.772,
+      "cover_pct": {
+        "urbano": 82.1,
+        "verde": 11.4,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 36.97,
+        "suhi_median": -0.94,
+        "suhi_p90": 0.62,
+        "utfvi_median": 0.0011,
+        "utfvi_class_pct_land": [
+          37.3,
+          47.0,
+          15.8,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 8.4
+      },
+      "night": {
+        "lst_c_median": 20.31,
+        "suhi_median": 2.76,
+        "suhi_p90": 3.06,
+        "utfvi_median": 0.0003,
+        "utfvi_class_pct_land": [
+          36.6,
+          63.4,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 6,
+      "dicofre": "110611",
+      "freguesia": "Carnide",
+      "area_km2_grid": 3.692,
+      "land_km2": 3.692,
+      "cover_pct": {
+        "urbano": 84.2,
+        "verde": 8.8,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 37.99,
+        "suhi_median": 0.25,
+        "suhi_p90": 1.2,
+        "utfvi_median": 0.0045,
+        "utfvi_class_pct_land": [
+          8.0,
+          50.2,
+          41.1,
+          0.7,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      },
+      "night": {
+        "lst_c_median": 19.51,
+        "suhi_median": 2.09,
+        "suhi_p90": 2.64,
+        "utfvi_median": -0.0017,
+        "utfvi_class_pct_land": [
+          84.3,
+          15.7,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 6.3
+      }
+    },
+    {
+      "parish_id": 7,
+      "dicofre": "110618",
+      "freguesia": "Lumiar",
+      "area_km2_grid": 6.59,
+      "land_km2": 6.59,
+      "cover_pct": {
+        "urbano": 85.8,
+        "verde": 7.7,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 36.77,
+        "suhi_median": -0.68,
+        "suhi_p90": 1.04,
+        "utfvi_median": 0.0013,
+        "utfvi_class_pct_land": [
+          35.9,
+          43.4,
+          17.5,
+          2.9,
+          0.2,
+          0.0
+        ],
+        "cool_island_pct_urban": 15.6
+      },
+      "night": {
+        "lst_c_median": 20.01,
+        "suhi_median": 2.56,
+        "suhi_p90": 3.02,
+        "utfvi_median": -0.0004,
+        "utfvi_class_pct_land": [
+          61.2,
+          38.8,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 6.9
+      }
+    },
+    {
+      "parish_id": 8,
+      "dicofre": "110621",
+      "freguesia": "Marvila",
+      "area_km2_grid": 7.125,
+      "land_km2": 6.242,
+      "cover_pct": {
+        "urbano": 68.6,
+        "verde": 9.6,
+        "agua": 12.4
+      },
+      "day": {
+        "lst_c_median": 37.88,
+        "suhi_median": 0.34,
+        "suhi_p90": 1.31,
+        "utfvi_median": 0.0045,
+        "utfvi_class_pct_land": [
+          3.9,
+          55.5,
+          39.5,
+          1.1,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 2.8
+      },
+      "night": {
+        "lst_c_median": 20.35,
+        "suhi_median": 2.66,
+        "suhi_p90": 3.06,
+        "utfvi_median": 0.0,
+        "utfvi_class_pct_land": [
+          48.9,
+          51.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.1
+      }
+    },
+    {
+      "parish_id": 9,
+      "dicofre": "110633",
+      "freguesia": "Olivais",
+      "area_km2_grid": 8.113,
+      "land_km2": 8.113,
+      "cover_pct": {
+        "urbano": 96.3,
+        "verde": 2.1,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 38.03,
+        "suhi_median": 0.56,
+        "suhi_p90": 2.88,
+        "utfvi_median": 0.0055,
+        "utfvi_class_pct_land": [
+          16.7,
+          29.9,
+          27.8,
+          21.6,
+          4.1,
+          0.0
+        ],
+        "cool_island_pct_urban": 3.5
+      },
+      "night": {
+        "lst_c_median": 20.21,
+        "suhi_median": 2.72,
+        "suhi_p90": 3.14,
+        "utfvi_median": 0.0002,
+        "utfvi_class_pct_land": [
+          44.4,
+          55.6,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.9
+      }
+    },
+    {
+      "parish_id": 10,
+      "dicofre": "110639",
+      "freguesia": "São Domingos de Benfica",
+      "area_km2_grid": 4.296,
+      "land_km2": 4.296,
+      "cover_pct": {
+        "urbano": 80.7,
+        "verde": 14.9,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 36.55,
+        "suhi_median": -1.14,
+        "suhi_p90": 0.18,
+        "utfvi_median": 0.0004,
+        "utfvi_class_pct_land": [
+          45.7,
+          47.8,
+          6.5,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 15.4
+      },
+      "night": {
+        "lst_c_median": 20.29,
+        "suhi_median": 2.78,
+        "suhi_p90": 3.14,
+        "utfvi_median": 0.0006,
+        "utfvi_class_pct_land": [
+          25.7,
+          74.3,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.2
+      }
+    },
+    {
+      "parish_id": 11,
+      "dicofre": "110654",
+      "freguesia": "Alvalade",
+      "area_km2_grid": 5.305,
+      "land_km2": 5.305,
+      "cover_pct": {
+        "urbano": 96.0,
+        "verde": 1.4,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 36.69,
+        "suhi_median": -0.84,
+        "suhi_p90": 1.0,
+        "utfvi_median": 0.0011,
+        "utfvi_class_pct_land": [
+          35.0,
+          48.3,
+          13.2,
+          2.5,
+          0.8,
+          0.1
+        ],
+        "cool_island_pct_urban": 14.1
+      },
+      "night": {
+        "lst_c_median": 20.35,
+        "suhi_median": 2.74,
+        "suhi_p90": 3.08,
+        "utfvi_median": 0.0003,
+        "utfvi_class_pct_land": [
+          38.3,
+          61.7,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.1
+      }
+    },
+    {
+      "parish_id": 12,
+      "dicofre": "110655",
+      "freguesia": "Areeiro",
+      "area_km2_grid": 1.716,
+      "land_km2": 1.716,
+      "cover_pct": {
+        "urbano": 91.7,
+        "verde": 4.0,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 35.68,
+        "suhi_median": -1.47,
+        "suhi_p90": -0.9,
+        "utfvi_median": -0.0013,
+        "utfvi_class_pct_land": [
+          83.2,
+          16.8,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 31.7
+      },
+      "night": {
+        "lst_c_median": 20.51,
+        "suhi_median": 2.92,
+        "suhi_p90": 3.22,
+        "utfvi_median": 0.0009,
+        "utfvi_class_pct_land": [
+          15.9,
+          84.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 13,
+      "dicofre": "110656",
+      "freguesia": "Arroios",
+      "area_km2_grid": 2.116,
+      "land_km2": 2.116,
+      "cover_pct": {
+        "urbano": 98.7,
+        "verde": 0.2,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 35.73,
+        "suhi_median": -1.5,
+        "suhi_p90": -0.9,
+        "utfvi_median": -0.0014,
+        "utfvi_class_pct_land": [
+          85.5,
+          14.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 29.2
+      },
+      "night": {
+        "lst_c_median": 20.8,
+        "suhi_median": 2.96,
+        "suhi_p90": 3.26,
+        "utfvi_median": 0.0011,
+        "utfvi_class_pct_land": [
+          0.7,
+          99.3,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 14,
+      "dicofre": "110657",
+      "freguesia": "Avenidas Novas",
+      "area_km2_grid": 3.006,
+      "land_km2": 3.006,
+      "cover_pct": {
+        "urbano": 98.9,
+        "verde": 0.6,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 35.89,
+        "suhi_median": -1.84,
+        "suhi_p90": 0.12,
+        "utfvi_median": -0.0021,
+        "utfvi_class_pct_land": [
+          64.1,
+          30.5,
+          5.4,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 51.9
+      },
+      "night": {
+        "lst_c_median": 20.61,
+        "suhi_median": 3.0,
+        "suhi_p90": 3.28,
+        "utfvi_median": 0.0011,
+        "utfvi_class_pct_land": [
+          9.5,
+          90.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 15,
+      "dicofre": "110658",
+      "freguesia": "Belém",
+      "area_km2_grid": 10.404,
+      "land_km2": 5.555,
+      "cover_pct": {
+        "urbano": 40.8,
+        "verde": 8.8,
+        "agua": 46.6
+      },
+      "day": {
+        "lst_c_median": 35.85,
+        "suhi_median": -1.98,
+        "suhi_p90": 0.0,
+        "utfvi_median": -0.0019,
+        "utfvi_class_pct_land": [
+          67.2,
+          25.9,
+          6.8,
+          0.1,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 38.6
+      },
+      "night": {
+        "lst_c_median": 20.28,
+        "suhi_median": 2.55,
+        "suhi_p90": 2.79,
+        "utfvi_median": 0.0001,
+        "utfvi_class_pct_land": [
+          47.1,
+          52.9,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 16,
+      "dicofre": "110659",
+      "freguesia": "Campo de Ourique",
+      "area_km2_grid": 1.651,
+      "land_km2": 1.651,
+      "cover_pct": {
+        "urbano": 88.1,
+        "verde": 5.1,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 36.15,
+        "suhi_median": -1.78,
+        "suhi_p90": -0.98,
+        "utfvi_median": -0.0014,
+        "utfvi_class_pct_land": [
+          84.0,
+          16.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 30.9
+      },
+      "night": {
+        "lst_c_median": 20.43,
+        "suhi_median": 2.74,
+        "suhi_p90": 3.02,
+        "utfvi_median": 0.0003,
+        "utfvi_class_pct_land": [
+          34.4,
+          65.6,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 17,
+      "dicofre": "110660",
+      "freguesia": "Estrela",
+      "area_km2_grid": 4.602,
+      "land_km2": 2.773,
+      "cover_pct": {
+        "urbano": 58.7,
+        "verde": 0.6,
+        "agua": 39.7
+      },
+      "day": {
+        "lst_c_median": 36.23,
+        "suhi_median": -1.74,
+        "suhi_p90": 0.52,
+        "utfvi_median": -0.0016,
+        "utfvi_class_pct_land": [
+          63.0,
+          23.4,
+          13.6,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 44.1
+      },
+      "night": {
+        "lst_c_median": 20.85,
+        "suhi_median": 3.06,
+        "suhi_p90": 3.42,
+        "utfvi_median": 0.0014,
+        "utfvi_class_pct_land": [
+          1.9,
+          98.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 18,
+      "dicofre": "110661",
+      "freguesia": "Misericórdia",
+      "area_km2_grid": 2.19,
+      "land_km2": 1.095,
+      "cover_pct": {
+        "urbano": 50.0,
+        "verde": 0.0,
+        "agua": 50.0
+      },
+      "day": {
+        "lst_c_median": 36.07,
+        "suhi_median": -1.42,
+        "suhi_p90": -0.72,
+        "utfvi_median": -0.0001,
+        "utfvi_class_pct_land": [
+          51.2,
+          48.8,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 13.7
+      },
+      "night": {
+        "lst_c_median": 20.57,
+        "suhi_median": 2.65,
+        "suhi_p90": 2.99,
+        "utfvi_median": 0.0005,
+        "utfvi_class_pct_land": [
+          22.8,
+          77.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 19,
+      "dicofre": "110662",
+      "freguesia": "Parque das Nações",
+      "area_km2_grid": 5.427,
+      "land_km2": 4.222,
+      "cover_pct": {
+        "urbano": 74.8,
+        "verde": 1.1,
+        "agua": 22.2
+      },
+      "day": {
+        "lst_c_median": 36.42,
+        "suhi_median": -1.02,
+        "suhi_p90": 0.74,
+        "utfvi_median": 0.0003,
+        "utfvi_class_pct_land": [
+          47.9,
+          35.6,
+          16.5,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 33.3
+      },
+      "night": {
+        "lst_c_median": 20.57,
+        "suhi_median": 2.98,
+        "suhi_p90": 3.41,
+        "utfvi_median": 0.001,
+        "utfvi_class_pct_land": [
+          21.7,
+          78.3,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 3.7
+      }
+    },
+    {
+      "parish_id": 20,
+      "dicofre": "110663",
+      "freguesia": "Penha de França",
+      "area_km2_grid": 2.688,
+      "land_km2": 2.174,
+      "cover_pct": {
+        "urbano": 67.3,
+        "verde": 6.1,
+        "agua": 19.1
+      },
+      "day": {
+        "lst_c_median": 36.99,
+        "suhi_median": -0.57,
+        "suhi_p90": 0.86,
+        "utfvi_median": 0.0014,
+        "utfvi_class_pct_land": [
+          29.3,
+          55.8,
+          14.8,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 8.5
+      },
+      "night": {
+        "lst_c_median": 20.69,
+        "suhi_median": 2.84,
+        "suhi_p90": 3.14,
+        "utfvi_median": 0.0008,
+        "utfvi_class_pct_land": [
+          12.5,
+          87.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 21,
+      "dicofre": "110664",
+      "freguesia": "Santa Clara",
+      "area_km2_grid": 3.335,
+      "land_km2": 3.335,
+      "cover_pct": {
+        "urbano": 62.0,
+        "verde": 21.6,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 37.19,
+        "suhi_median": -0.52,
+        "suhi_p90": 0.65,
+        "utfvi_median": 0.0018,
+        "utfvi_class_pct_land": [
+          15.9,
+          69.3,
+          14.2,
+          0.7,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 3.7
+      },
+      "night": {
+        "lst_c_median": 19.47,
+        "suhi_median": 2.12,
+        "suhi_p90": 2.46,
+        "utfvi_median": -0.0022,
+        "utfvi_class_pct_land": [
+          99.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 8.0
+      }
+    },
+    {
+      "parish_id": 22,
+      "dicofre": "110665",
+      "freguesia": "Santa Maria Maior",
+      "area_km2_grid": 3.004,
+      "land_km2": 1.475,
+      "cover_pct": {
+        "urbano": 49.1,
+        "verde": 0.0,
+        "agua": 50.9
+      },
+      "day": {
+        "lst_c_median": 36.33,
+        "suhi_median": -1.36,
+        "suhi_p90": 0.01,
+        "utfvi_median": -0.0002,
+        "utfvi_class_pct_land": [
+          55.2,
+          37.0,
+          7.8,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 15.9
+      },
+      "night": {
+        "lst_c_median": 20.71,
+        "suhi_median": 2.72,
+        "suhi_p90": 3.18,
+        "utfvi_median": 0.0008,
+        "utfvi_class_pct_land": [
+          7.0,
+          93.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 23,
+      "dicofre": "110666",
+      "freguesia": "Santo António",
+      "area_km2_grid": 1.49,
+      "land_km2": 1.49,
+      "cover_pct": {
+        "urbano": 99.5,
+        "verde": 0.3,
+        "agua": 0.0
+      },
+      "day": {
+        "lst_c_median": 35.29,
+        "suhi_median": -2.24,
+        "suhi_p90": -1.44,
+        "utfvi_median": -0.0034,
+        "utfvi_class_pct_land": [
+          98.5,
+          1.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 75.4
+      },
+      "night": {
+        "lst_c_median": 20.84,
+        "suhi_median": 2.79,
+        "suhi_p90": 3.11,
+        "utfvi_median": 0.0008,
+        "utfvi_class_pct_land": [
+          2.6,
+          97.4,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    },
+    {
+      "parish_id": 24,
+      "dicofre": "110667",
+      "freguesia": "São Vicente",
+      "area_km2_grid": 1.99,
+      "land_km2": 1.237,
+      "cover_pct": {
+        "urbano": 59.1,
+        "verde": 1.5,
+        "agua": 37.8
+      },
+      "day": {
+        "lst_c_median": 36.46,
+        "suhi_median": -1.26,
+        "suhi_p90": -0.06,
+        "utfvi_median": -0.0003,
+        "utfvi_class_pct_land": [
+          58.1,
+          35.7,
+          6.2,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 9.5
+      },
+      "night": {
+        "lst_c_median": 20.47,
+        "suhi_median": 2.66,
+        "suhi_p90": 2.98,
+        "utfvi_median": 0.0002,
+        "utfvi_class_pct_land": [
+          37.6,
+          62.4,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cool_island_pct_urban": 0.0
+      }
+    }
+  ]
+}
