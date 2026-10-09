@@ -1,5 +1,5 @@
 /* f5 — Diagnóstico do ponto clicado: lê as grelhas binárias do catálogo
-   (valores dos compostos de dia e de noite) sem pedir cálculos ao backend.
+   (valores dos compostos de dia e de madrugada) sem pedir cálculos ao backend.
    As classes vêm de bandas próprias, calculadas no pipeline sobre o valor
    original; recalculá-las aqui sobre o valor arredondado mudava de classe junto
    aos limites. */
@@ -75,7 +75,7 @@ function cellHtml(period, key, vals, cover) {
 function renderDiagnostic(result, parishName) {
   const body = document.getElementById("diag-body");
   if (!result) {
-    body.innerHTML = `<p class="hint">Clica no mapa para ver os valores desse ponto, de dia e de noite.</p>`;
+    body.innerHTML = `<p class="hint">Clica no mapa para ver os valores desse ponto, de dia e de madrugada.</p>`;
     return;
   }
   if (result.outside) {
@@ -97,10 +97,11 @@ function renderDiagnostic(result, parishName) {
     ["COOL_FREQ", "Refúgio térmico"],
   ];
   const current = APP_STATE.period;
+  const periods = APP_STATE.catalog.periods;
   body.innerHTML = `${place}
     <table class="diag">
       <colgroup><col><col class="${current === "day" ? "current" : ""}"><col class="${current === "night" ? "current" : ""}"></colgroup>
-      <thead><tr><th scope="col"><span class="sr-only">Indicador</span></th><th scope="col">Dia</th><th scope="col">Noite</th></tr></thead>
+      <thead><tr><th scope="col"><span class="sr-only">Indicador</span></th><th scope="col">${periods.day.label}</th><th scope="col">${periods.night.label}</th></tr></thead>
       <tbody>${rows.map(([key, label]) => `<tr><th scope="row">${label}</th>
         <td>${cellHtml("day", key, result.values.day, result.cover)}</td>
         <td>${cellHtml("night", key, result.values.night, result.cover)}</td></tr>`).join("")}

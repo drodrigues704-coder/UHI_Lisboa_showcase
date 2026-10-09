@@ -1,28 +1,40 @@
 /* f8 — Ciclo diário: a ilha de calor ao longo das 24 h, com todas as passagens
-   selecionadas (incluindo as de sol baixo, que não entram nos mapas), e a mesma
-   curva por Local Climate Zone. Lê catalog.diurnal (p6). */
+   selecionadas (incluindo as que não entram nos mapas), a curva ajustada (p6,
+   fit_diurnal_cycle) e a mesma curva por Local Climate Zone. Lê catalog.diurnal. */
 
 const DIURNAL = { chart: null, lcz: null };
 
-/* O nascer e o pôr do sol juntam-se numa só série: são o mesmo critério (sol
-   entre os dois limiares) e distinguem-se pela hora no eixo. */
+/* Os pontos separam-se pelo mapa onde entram: é o que liga o gráfico aos mapas.
+   O nascer e o pôr do sol e a noite antes da meia-noite ficam numa só série. */
 function diurnalGroups() {
+  const periods = APP_STATE.catalog.periods;
   return [
-    { key: "day", periods: ["day"], label: "Dia", color: APP_CONFIG.periodColors.day },
-    { key: "transition", periods: ["dawn", "dusk"], label: "Nascer e pôr do sol", color: "#7d8f9f" },
-    { key: "night", periods: ["night"], label: "Noite", color: APP_CONFIG.periodColors.night },
+    { key: "day", label: `${periods.day.label} (mapa)`, color: APP_CONFIG.periodColors.day,
+      test: (s) => s.period === "day" && s.in_map },
+    { key: "night", label: `${periods.night.label} (mapa)`, color: APP_CONFIG.periodColors.night,
+      test: (s) => s.period === "night" && s.in_map },
+    { key: "out", label: "Fora dos mapas", color: "#7d8f9f", test: (s) => !s.in_map },
   ];
 }
+
+const FIT_BAND = ["IC baixo", "IC alto"];
+
+/* 90 a partir dos percentis do intervalo gravados pelo p6 ([5, 95]). */
+function ciLevel(f) {
+  return f.ci_percentiles[1] - f.ci_percentiles[0];
+}
+const FIT_LINE = "Curva ajustada";
 
 function binMid(b) {
   return (b.hour_min + b.hour_max) / 2;
 }
 
-/* 9.5 -> "9h30", 21 -> "21h" (arredondado à meia hora). */
+/* 9.5 -> "9h30", 21 -> "21h", 10.23 -> "10h15" (arredondado ao quarto de hora). */
 function fmtHour(h) {
-  const half = Math.round(((h % 24) + 24) % 24 * 2) / 2;
-  const whole = Math.floor(half);
-  return half === whole ? `${whole}h` : `${whole}h30`;
+  const q = Math.round(((h % 24) + 24) % 24 * 4) / 4 % 24;
+  const whole = Math.floor(q);
+  const min = Math.round((q - whole) * 60);
+  return min ? `${whole}h${String(min).padStart(2, "0")}` : `${whole}h`;
 }
 
 /* Data e hora local da passagem, a partir da hora UTC do catálogo. */
@@ -34,21 +46,6 @@ function sceneWhen(scene, offset) {
   const hh = String(t.getUTCHours()).padStart(2, "0");
   const mi = String(t.getUTCMinutes()).padStart(2, "0");
   return `${dd}/${mm}/${t.getUTCFullYear()}, ${hh}:${mi}`;
-}
-
-/* Horas a que a mediana troca de sinal, por interpolação linear entre classes
-   vizinhas (dando a volta à meia-noite). */
-function signChanges(bins) {
-  const pts = bins.filter((b) => b.median !== undefined).map((b) => [binMid(b), b.median]);
-  const out = [];
-  for (let i = 0; i < pts.length; i += 1) {
-    const [h0, v0] = pts[i];
-    const [h1raw, v1] = pts[(i + 1) % pts.length];
-    const h1 = h1raw <= h0 ? h1raw + 24 : h1raw;
-    if (v0 === 0 || Math.sign(v0) === Math.sign(v1)) continue;
-    out.push({ hour: (h0 + (h1 - h0) * (v0 / (v0 - v1))) % 24, rising: v1 > v0 });
-  }
-  return out;
 }
 
 function binRange(b) {
@@ -66,24 +63,42 @@ function diurnalLead(d) {
   } else {
     parts.push(`É mais fraca ${binRange(lo)} (${signed(lo.median, 1)} °C).`);
   }
-  const changes = signChanges(d.bins);
-  const down = changes.find((c) => !c.rising);
-  const up = changes.find((c) => c.rising);
-  if (down && up) {
-    parts.push(`A diferença passa a negativa por volta das ${fmtHour(down.hour)} e volta a positiva por volta das ${fmtHour(up.hour)}.`);
+  // As horas de troca de sinal e a média vêm da curva ajustada: são os resultados
+  // robustos entre variantes do modelo. O pico e o mínimo vêm das medianas acima.
+  const f = d.fit;
+  if (f && f.sign_changes.down && f.sign_changes.up) {
+    const when = (c) => `por volta das ${fmtHour(c.hour)} (entre as ${fmtHour(c.ci[0])} e as ${fmtHour(c.ci[1])})`;
+    parts.push(`A diferença passa a negativa ${when(f.sign_changes.down)} e volta a positiva ${when(f.sign_changes.up)}.`);
+  }
+  if (f) {
+    const mean = Math.abs(f.daily_mean_k) < 0.05 ? "ao nível do campo"
+      : `${fmtNumber(Math.abs(f.daily_mean_k), 1)} °C ${f.daily_mean_k > 0 ? "acima" : "abaixo"} do campo`;
+    parts.push(`Em média, ao longo das 24 horas, Lisboa fica ${mean}: `
+      + `o mapa de dia mostra ${signed(f.maps.day.suhi_intensity_k_median, 1)} °C e o de madrugada `
+      + `${signed(f.maps.night.suhi_intensity_k_median, 1)} °C.`);
   }
   return parts.join(" ");
 }
 
 function diurnalNote(d) {
-  const n = d.n_scenes_by_period;
-  const nTrans = (n.dawn || 0) + (n.dusk || 0);
   const cat = APP_STATE.catalog;
+  const nOut = d.n_scenes - d.n_scenes_in_maps;
+  const sparse = d.bins.filter((b) => b.median === undefined).map((b) => `${b.hour_min}–${b.hour_max}h`);
+  const f = d.fit;
   return `Cada ponto é uma passagem do satélite, num dia diferente (${d.n_scenes} passagens, verões de `
-    + `${cat.years[0]} a ${cat.years[cat.years.length - 1]}). A linha é a mediana a cada ${d.bin_h} h e a `
-    + `faixa vai do 1.º ao 3.º quartil. É um ciclo composto a partir de muitos dias, não o ciclo de um dia real. `
-    + `As ${nTrans} passagens do nascer e do pôr do sol só entram aqui: os mapas de dia e de noite não as usam. `
-    + `Hora legal de verão (UTC+${d.local_utc_offset_h}).`;
+    + `${cat.years[0]} a ${cat.years[cat.years.length - 1]}). A linha contínua é a mediana a cada ${d.bin_h} h. `
+    + (f ? `A tracejada é uma sinusoide ajustada a todas as passagens, e a faixa o seu intervalo de `
+      + `${ciLevel(f)}% (reamostrando verões inteiros). Serve para a média e para as horas de troca de sinal; `
+      + `o pico e o mínimo leem-se nas medianas. ` : "")
+    + (sparse.length ? `Onde há poucas passagens para uma mediana (${sparse.join(", ")}) a linha da mediana só liga as vizinhas. ` : "")
+    + `É um ciclo composto a partir de muitos dias, não o ciclo de um dia real. `
+    + `As ${nOut} passagens cinzentas só entram aqui. Hora legal de verão (UTC+${d.local_utc_offset_h}).`;
+}
+
+/* Curva ajustada a fechar nas 24 h (o último ponto repete o das 0 h). */
+function fitPoints(f, key) {
+  const pts = f.curve.map((c) => ({ x: c.hour, y: c[key] }));
+  return [...pts, { x: 24, y: f.curve[0][key] }];
 }
 
 function hourAxis(font) {
@@ -111,10 +126,19 @@ function initDiurnalChart() {
   const font = { family: "Public Sans", size: 11 };
   const withMedian = d.bins.filter((b) => b.median !== undefined);
 
-  const bandStyle = { showLine: true, pointRadius: 0, borderWidth: 0, backgroundColor: "rgba(31, 95, 168, 0.12)" };
+  const bandStyle = { showLine: true, pointRadius: 0, pointHitRadius: 0, borderWidth: 0,
+    backgroundColor: "rgba(90, 90, 90, 0.13)" };
+  const fit = d.fit ? [
+    { ...bandStyle, label: FIT_BAND[0], data: fitPoints(d.fit, "lo"), fill: false },
+    { ...bandStyle, label: FIT_BAND[1], data: fitPoints(d.fit, "hi"), fill: "-1" },
+    {
+      label: FIT_LINE, showLine: true, pointRadius: 0, borderWidth: 1.5, borderDash: [5, 4],
+      // fundo transparente: na legenda fica só o contorno tracejado, como a linha
+      borderColor: "#4a4a4a", backgroundColor: "rgba(0, 0, 0, 0)", data: fitPoints(d.fit, "value"),
+    },
+  ] : [];
   const datasets = [
-    { ...bandStyle, label: "p25", data: withMedian.map((b) => ({ x: binMid(b), y: b.p25 })), fill: false },
-    { ...bandStyle, label: "p75", data: withMedian.map((b) => ({ x: binMid(b), y: b.p75 })), fill: "-1" },
+    ...fit,
     {
       label: `Mediana a cada ${d.bin_h} h`, showLine: true, pointRadius: 0, borderWidth: 2.5,
       borderColor: "#1f5fa8", backgroundColor: "#1f5fa8",
@@ -123,7 +147,7 @@ function initDiurnalChart() {
     ...diurnalGroups().map((g) => ({
       label: g.label, pointRadius: 3.5, pointHoverRadius: 5,
       backgroundColor: g.color, borderColor: g.color,
-      data: d.scenes.filter((s) => g.periods.includes(s.period))
+      data: d.scenes.filter(g.test)
         .map((s) => ({ x: s.hour_local, y: s.suhi_intensity_k, scene: s })),
     })),
   ];
@@ -136,17 +160,21 @@ function initDiurnalChart() {
       plugins: {
         legend: {
           position: "top",
-          labels: { font, boxWidth: 12, filter: (item) => !["p25", "p75"].includes(item.text) },
+          labels: { font, boxWidth: 12, filter: (item) => !FIT_BAND.includes(item.text) },
         },
         tooltip: {
-          filter: (item) => !["p25", "p75"].includes(item.dataset.label),
+          filter: (item) => !FIT_BAND.includes(item.dataset.label),
           callbacks: {
             title: (items) => {
+              if (!items.length) return "";   // só a banda do IC sob o rato, que o filtro tira
               const s = items[0].raw.scene;
-              return s ? sceneWhen(s, d.local_utc_offset_h) : `${items[0].raw.x - d.bin_h / 2}h–${items[0].raw.x + d.bin_h / 2}h`;
+              if (s) return sceneWhen(s, d.local_utc_offset_h);
+              if (items[0].dataset.label === FIT_LINE) return fmtHour(items[0].raw.x);
+              return `${items[0].raw.x - d.bin_h / 2}h–${items[0].raw.x + d.bin_h / 2}h`;
             },
             label: (ctx) => {
               const s = ctx.raw.scene;
+              if (ctx.dataset.label === FIT_LINE) return `Curva ajustada: ${signed(ctx.raw.y, 1)} °C`;
               if (!s) return `Mediana: ${signed(ctx.raw.y, 1)} °C`;
               return [`${signed(s.suhi_intensity_k, 1)} °C face ao campo`,
                 `Cidade ${fmtNumber(s.urban_median_c, 1)} °C, campo ${fmtNumber(s.reference_median_c, 1)} °C`];

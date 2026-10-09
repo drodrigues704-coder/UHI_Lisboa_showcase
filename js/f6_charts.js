@@ -58,8 +58,8 @@ function initCharts(stats) {
     data: {
       labels,
       datasets: [
-        { label: "Dia", data: CHARTS.order.map((p) => p.day.suhi_median), backgroundColor: APP_CONFIG.periodColors.day },
-        { label: "Noite", data: CHARTS.order.map((p) => p.night.suhi_median), backgroundColor: APP_CONFIG.periodColors.night },
+        { label: APP_STATE.catalog.periods.day.label, data: CHARTS.order.map((p) => p.day.suhi_median), backgroundColor: APP_CONFIG.periodColors.day },
+        { label: APP_STATE.catalog.periods.night.label, data: CHARTS.order.map((p) => p.night.suhi_median), backgroundColor: APP_CONFIG.periodColors.night },
       ],
     },
     options: suhiOpts,
@@ -124,7 +124,7 @@ function initCoverChart() {
   const note = document.getElementById("chart-cover-note");
   if (note && urban) {
     note.textContent = `O zero é a mediana urbana de Lisboa: ${fmtNumber(urban.lst_c_median, 1)} °C de dia, `
-      + `${fmtNumber((night && night.get(1) || {}).lst_c_median ?? 0, 1)} °C de noite.`;
+      + `${fmtNumber((night && night.get(1) || {}).lst_c_median ?? 0, 1)} °C de madrugada.`;
   }
 
   const lead = document.getElementById("chart-cover-lead");
@@ -135,8 +135,8 @@ function initCoverChart() {
     const nightOthers = others.map((c) => (night.get(c.code) || {}).delta).filter((v) => v != null);
     lead.textContent = [
       campSentence("De dia", others.map((c) => c.delta)),
-      campSentence("De noite", nightOthers),
-      `O verde de Lisboa fica ${vsCity(inside.delta)} de dia e ${vsCity(nightInside.delta)} de noite.`,
+      campSentence("De madrugada", nightOthers),
+      `O verde de Lisboa fica ${vsCity(inside.delta)} de dia e ${vsCity(nightInside.delta)} de madrugada.`,
     ].join(" ");
   }
 
@@ -159,8 +159,8 @@ function initCoverChart() {
     data: {
       labels: covers.map((c) => c.label),
       datasets: [
-        { label: "Dia", data: covers.map((c) => delta(day, c.code)), backgroundColor: APP_CONFIG.periodColors.day },
-        { label: "Noite", data: covers.map((c) => delta(night, c.code)), backgroundColor: APP_CONFIG.periodColors.night },
+        { label: APP_STATE.catalog.periods.day.label, data: covers.map((c) => delta(day, c.code)), backgroundColor: APP_CONFIG.periodColors.day },
+        { label: APP_STATE.catalog.periods.night.label, data: covers.map((c) => delta(night, c.code)), backgroundColor: APP_CONFIG.periodColors.night },
       ],
     },
     options,

@@ -34,19 +34,19 @@
       "cool_island_pct_urban": 19.2
     },
     "night": {
-      "lst_c_median": 20.27,
-      "suhi_median": 2.64,
-      "suhi_p90": 3.1,
+      "lst_c_median": 20.0,
+      "suhi_median": 2.87,
+      "suhi_p90": 3.32,
       "utfvi_median": 0.0001,
       "utfvi_class_pct_land": [
-        47.5,
-        52.5,
+        47.6,
+        52.4,
         0.0,
         0.0,
         0.0,
         0.0
       ],
-      "cool_island_pct_urban": 1.6
+      "cool_island_pct_urban": 1.7
     }
   },
   "freguesias": [
@@ -77,19 +77,19 @@
         "cool_island_pct_urban": 7.9
       },
       "night": {
-        "lst_c_median": 19.97,
-        "suhi_median": 2.36,
-        "suhi_p90": 2.64,
-        "utfvi_median": -0.001,
+        "lst_c_median": 19.71,
+        "suhi_median": 2.55,
+        "suhi_p90": 2.82,
+        "utfvi_median": -0.0011,
         "utfvi_class_pct_land": [
-          91.3,
-          8.7,
+          92.6,
+          7.4,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 0.2
+        "cool_island_pct_urban": 0.5
       }
     },
     {
@@ -119,19 +119,19 @@
         "cool_island_pct_urban": 20.2
       },
       "night": {
-        "lst_c_median": 20.03,
-        "suhi_median": 2.32,
-        "suhi_p90": 2.83,
-        "utfvi_median": -0.0011,
+        "lst_c_median": 19.77,
+        "suhi_median": 2.59,
+        "suhi_p90": 3.1,
+        "utfvi_median": -0.001,
         "utfvi_class_pct_land": [
-          77.1,
-          22.9,
+          78.7,
+          21.3,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 0.0
+        "cool_island_pct_urban": 0.4
       }
     },
     {
@@ -161,13 +161,13 @@
         "cool_island_pct_urban": 2.0
       },
       "night": {
-        "lst_c_median": 20.25,
-        "suhi_median": 2.62,
-        "suhi_p90": 3.08,
+        "lst_c_median": 19.93,
+        "suhi_median": 2.83,
+        "suhi_p90": 3.33,
         "utfvi_median": -0.0002,
         "utfvi_class_pct_land": [
-          56.7,
-          43.3,
+          61.6,
+          38.4,
           0.0,
           0.0,
           0.0,
@@ -203,19 +203,19 @@
         "cool_island_pct_urban": 23.4
       },
       "night": {
-        "lst_c_median": 19.87,
-        "suhi_median": 2.3,
-        "suhi_p90": 2.64,
-        "utfvi_median": -0.0009,
+        "lst_c_median": 19.66,
+        "suhi_median": 2.53,
+        "suhi_p90": 2.87,
+        "utfvi_median": -0.0008,
         "utfvi_class_pct_land": [
-          83.4,
-          16.6,
+          83.0,
+          17.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 3.6
+        "cool_island_pct_urban": 3.8
       }
     },
     {
@@ -245,13 +245,13 @@
         "cool_island_pct_urban": 8.4
       },
       "night": {
-        "lst_c_median": 20.31,
-        "suhi_median": 2.76,
-        "suhi_p90": 3.06,
+        "lst_c_median": 20.1,
+        "suhi_median": 2.96,
+        "suhi_p90": 3.29,
         "utfvi_median": 0.0003,
         "utfvi_class_pct_land": [
-          36.6,
-          63.4,
+          34.3,
+          65.7,
           0.0,
           0.0,
           0.0,
@@ -287,19 +287,19 @@
         "cool_island_pct_urban": 0.0
       },
       "night": {
-        "lst_c_median": 19.51,
-        "suhi_median": 2.09,
-        "suhi_p90": 2.64,
+        "lst_c_median": 19.33,
+        "suhi_median": 2.27,
+        "suhi_p90": 2.84,
         "utfvi_median": -0.0017,
         "utfvi_class_pct_land": [
-          84.3,
-          15.7,
+          86.2,
+          13.8,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 6.3
+        "cool_island_pct_urban": 6.9
       }
     },
     {
@@ -329,19 +329,19 @@
         "cool_island_pct_urban": 15.6
       },
       "night": {
-        "lst_c_median": 20.01,
-        "suhi_median": 2.56,
-        "suhi_p90": 3.02,
+        "lst_c_median": 19.82,
+        "suhi_median": 2.78,
+        "suhi_p90": 3.22,
         "utfvi_median": -0.0004,
         "utfvi_class_pct_land": [
-          61.2,
-          38.8,
+          61.1,
+          38.9,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 6.9
+        "cool_island_pct_urban": 6.3
       }
     },
     {
@@ -371,19 +371,19 @@
         "cool_island_pct_urban": 2.8
       },
       "night": {
-        "lst_c_median": 20.35,
-        "suhi_median": 2.66,
-        "suhi_p90": 3.06,
+        "lst_c_median": 20.02,
+        "suhi_median": 2.92,
+        "suhi_p90": 3.28,
         "utfvi_median": 0.0,
         "utfvi_class_pct_land": [
-          48.9,
-          51.1,
+          48.3,
+          51.7,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 0.1
+        "cool_island_pct_urban": 0.0
       }
     },
     {
@@ -413,19 +413,19 @@
         "cool_island_pct_urban": 3.5
       },
       "night": {
-        "lst_c_median": 20.21,
-        "suhi_median": 2.72,
-        "suhi_p90": 3.14,
+        "lst_c_median": 19.99,
+        "suhi_median": 2.94,
+        "suhi_p90": 3.35,
         "utfvi_median": 0.0002,
         "utfvi_class_pct_land": [
-          44.4,
-          55.6,
+          45.2,
+          54.8,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 0.9
+        "cool_island_pct_urban": 1.2
       }
     },
     {
@@ -455,19 +455,19 @@
         "cool_island_pct_urban": 15.4
       },
       "night": {
-        "lst_c_median": 20.29,
-        "suhi_median": 2.78,
-        "suhi_p90": 3.14,
-        "utfvi_median": 0.0006,
+        "lst_c_median": 20.03,
+        "suhi_median": 3.01,
+        "suhi_p90": 3.37,
+        "utfvi_median": 0.0005,
         "utfvi_class_pct_land": [
-          25.7,
-          74.3,
+          25.8,
+          74.2,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 0.2
+        "cool_island_pct_urban": 0.3
       }
     },
     {
@@ -497,19 +497,19 @@
         "cool_island_pct_urban": 14.1
       },
       "night": {
-        "lst_c_median": 20.35,
-        "suhi_median": 2.74,
-        "suhi_p90": 3.08,
-        "utfvi_median": 0.0003,
+        "lst_c_median": 20.09,
+        "suhi_median": 2.94,
+        "suhi_p90": 3.31,
+        "utfvi_median": 0.0002,
         "utfvi_class_pct_land": [
-          38.3,
-          61.7,
+          41.3,
+          58.7,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 0.1
+        "cool_island_pct_urban": 0.5
       }
     },
     {
@@ -539,13 +539,13 @@
         "cool_island_pct_urban": 31.7
       },
       "night": {
-        "lst_c_median": 20.51,
-        "suhi_median": 2.92,
-        "suhi_p90": 3.22,
-        "utfvi_median": 0.0009,
+        "lst_c_median": 20.26,
+        "suhi_median": 3.15,
+        "suhi_p90": 3.41,
+        "utfvi_median": 0.001,
         "utfvi_class_pct_land": [
-          15.9,
-          84.1,
+          13.9,
+          86.1,
           0.0,
           0.0,
           0.0,
@@ -581,13 +581,13 @@
         "cool_island_pct_urban": 29.2
       },
       "night": {
-        "lst_c_median": 20.8,
-        "suhi_median": 2.96,
-        "suhi_p90": 3.26,
-        "utfvi_median": 0.0011,
+        "lst_c_median": 20.45,
+        "suhi_median": 3.21,
+        "suhi_p90": 3.49,
+        "utfvi_median": 0.0012,
         "utfvi_class_pct_land": [
-          0.7,
-          99.3,
+          0.4,
+          99.6,
           0.0,
           0.0,
           0.0,
@@ -623,13 +623,13 @@
         "cool_island_pct_urban": 51.9
       },
       "night": {
-        "lst_c_median": 20.61,
-        "suhi_median": 3.0,
-        "suhi_p90": 3.28,
-        "utfvi_median": 0.0011,
+        "lst_c_median": 20.36,
+        "suhi_median": 3.22,
+        "suhi_p90": 3.47,
+        "utfvi_median": 0.0012,
         "utfvi_class_pct_land": [
-          9.5,
-          90.5,
+          5.5,
+          94.5,
           0.0,
           0.0,
           0.0,
@@ -665,13 +665,13 @@
         "cool_island_pct_urban": 38.6
       },
       "night": {
-        "lst_c_median": 20.28,
-        "suhi_median": 2.55,
-        "suhi_p90": 2.79,
-        "utfvi_median": 0.0001,
+        "lst_c_median": 20.01,
+        "suhi_median": 2.74,
+        "suhi_p90": 3.0,
+        "utfvi_median": -0.0,
         "utfvi_class_pct_land": [
-          47.1,
-          52.9,
+          50.1,
+          49.9,
           0.0,
           0.0,
           0.0,
@@ -707,13 +707,13 @@
         "cool_island_pct_urban": 30.9
       },
       "night": {
-        "lst_c_median": 20.43,
-        "suhi_median": 2.74,
-        "suhi_p90": 3.02,
-        "utfvi_median": 0.0003,
+        "lst_c_median": 20.17,
+        "suhi_median": 2.97,
+        "suhi_p90": 3.27,
+        "utfvi_median": 0.0004,
         "utfvi_class_pct_land": [
-          34.4,
-          65.6,
+          30.2,
+          69.8,
           0.0,
           0.0,
           0.0,
@@ -749,13 +749,13 @@
         "cool_island_pct_urban": 44.1
       },
       "night": {
-        "lst_c_median": 20.85,
-        "suhi_median": 3.06,
-        "suhi_p90": 3.42,
+        "lst_c_median": 20.54,
+        "suhi_median": 3.27,
+        "suhi_p90": 3.64,
         "utfvi_median": 0.0014,
         "utfvi_class_pct_land": [
-          1.9,
-          98.1,
+          1.7,
+          98.3,
           0.0,
           0.0,
           0.0,
@@ -791,13 +791,13 @@
         "cool_island_pct_urban": 13.7
       },
       "night": {
-        "lst_c_median": 20.57,
-        "suhi_median": 2.65,
-        "suhi_p90": 2.99,
+        "lst_c_median": 20.26,
+        "suhi_median": 3.01,
+        "suhi_p90": 3.24,
         "utfvi_median": 0.0005,
         "utfvi_class_pct_land": [
-          22.8,
-          77.2,
+          14.7,
+          85.3,
           0.0,
           0.0,
           0.0,
@@ -833,19 +833,19 @@
         "cool_island_pct_urban": 33.3
       },
       "night": {
-        "lst_c_median": 20.57,
-        "suhi_median": 2.98,
-        "suhi_p90": 3.41,
+        "lst_c_median": 20.2,
+        "suhi_median": 3.18,
+        "suhi_p90": 3.63,
         "utfvi_median": 0.001,
         "utfvi_class_pct_land": [
-          21.7,
-          78.3,
+          21.3,
+          78.7,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 3.7
+        "cool_island_pct_urban": 3.1
       }
     },
     {
@@ -875,13 +875,13 @@
         "cool_island_pct_urban": 8.5
       },
       "night": {
-        "lst_c_median": 20.69,
-        "suhi_median": 2.84,
-        "suhi_p90": 3.14,
-        "utfvi_median": 0.0008,
+        "lst_c_median": 20.23,
+        "suhi_median": 3.01,
+        "suhi_p90": 3.28,
+        "utfvi_median": 0.0007,
         "utfvi_class_pct_land": [
-          12.5,
-          87.5,
+          14.0,
+          86.0,
           0.0,
           0.0,
           0.0,
@@ -917,19 +917,19 @@
         "cool_island_pct_urban": 3.7
       },
       "night": {
-        "lst_c_median": 19.47,
-        "suhi_median": 2.12,
-        "suhi_p90": 2.46,
-        "utfvi_median": -0.0022,
+        "lst_c_median": 19.3,
+        "suhi_median": 2.33,
+        "suhi_p90": 2.71,
+        "utfvi_median": -0.002,
         "utfvi_class_pct_land": [
-          99.0,
-          1.0,
+          98.6,
+          1.4,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "cool_island_pct_urban": 8.0
+        "cool_island_pct_urban": 10.8
       }
     },
     {
@@ -959,13 +959,13 @@
         "cool_island_pct_urban": 15.9
       },
       "night": {
-        "lst_c_median": 20.71,
-        "suhi_median": 2.72,
-        "suhi_p90": 3.18,
+        "lst_c_median": 20.33,
+        "suhi_median": 3.04,
+        "suhi_p90": 3.39,
         "utfvi_median": 0.0008,
         "utfvi_class_pct_land": [
-          7.0,
-          93.0,
+          5.2,
+          94.8,
           0.0,
           0.0,
           0.0,
@@ -1001,13 +1001,13 @@
         "cool_island_pct_urban": 75.4
       },
       "night": {
-        "lst_c_median": 20.84,
-        "suhi_median": 2.79,
-        "suhi_p90": 3.11,
-        "utfvi_median": 0.0008,
+        "lst_c_median": 20.48,
+        "suhi_median": 3.09,
+        "suhi_p90": 3.41,
+        "utfvi_median": 0.0011,
         "utfvi_class_pct_land": [
-          2.6,
-          97.4,
+          0.5,
+          99.5,
           0.0,
           0.0,
           0.0,
@@ -1043,13 +1043,13 @@
         "cool_island_pct_urban": 9.5
       },
       "night": {
-        "lst_c_median": 20.47,
-        "suhi_median": 2.66,
-        "suhi_p90": 2.98,
-        "utfvi_median": 0.0002,
+        "lst_c_median": 20.17,
+        "suhi_median": 2.98,
+        "suhi_p90": 3.25,
+        "utfvi_median": 0.0003,
         "utfvi_class_pct_land": [
-          37.6,
-          62.4,
+          32.0,
+          68.0,
           0.0,
           0.0,
           0.0,

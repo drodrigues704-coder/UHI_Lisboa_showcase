@@ -14,17 +14,18 @@ repositório privado.
 
 ## O que a app mostra
 
-- **Quatro camadas**, de dia e de noite: temperatura da superfície, ilha de
+- **Quatro camadas**, de dia e de madrugada: temperatura da superfície, ilha de
   calor face ao campo (SUHI), stress térmico (UTFVI, classes de Zhang et al.)
   e refúgios térmicos
 - **Diagnóstico ao clicar** em qualquer ponto de Lisboa: os valores de dia e de
-  noite, a classe e a freguesia
+  madrugada, a classe e a freguesia
 - **Gráficos por freguesia** (as 24 de Lisboa) e um gráfico que compara cada
   tipo de coberto com a cidade
 - **A ilha de calor ao longo das 24 horas**: cada passagem do satélite é um
-  ponto, à hora local a que foi feita, incluindo as do nascer e do pôr do sol
-  que os mapas deixam de fora. É um ciclo composto de muitos dias, não o de um
-  dia real
+  ponto, à hora local a que foi feita, incluindo as que os mapas deixam de
+  fora (nascer e pôr do sol, noite antes da meia-noite). Uma curva ajustada a
+  todas as passagens dá a ilha de calor média do dia inteiro e as horas em que
+  muda de sinal. É um ciclo composto de muitos dias, não o de um dia real
 - **A mesma curva por tipo de tecido urbano** (Local Climate Zones, mapa global
   de Demuzere et al. 2022)
 - Três mapas de fundo: claro, escuro e satélite
@@ -33,22 +34,30 @@ repositório privado.
 
 | | Lisboa face ao campo |
 |---|---|
-| Dia (11 passagens) | **0,8 °C mais fresca** |
-| Noite (21 passagens) | **2,8 °C mais quente** |
+| Dia (11 passagens, 9h30–17h40) | **0,8 °C mais fresca** |
+| Madrugada (16 passagens, 0h–6h) | **2,9 °C mais quente** |
+| Média das 24 horas (curva ajustada) | **0,9 °C mais quente** (0,7 a 1,1) |
 
 É o ciclo diário típico de uma cidade mediterrânica. À tarde, o restolho seco
 do campo aquece mais depressa do que a cidade, e Lisboa fica 1,3 °C mais
-fresca. De madrugada, o campo arrefece por radiação e a cidade fica 2,8 °C
-acima. A ilha de calor de Lisboa é **noturna**.
+fresca. De madrugada, o campo arrefece por radiação e a cidade fica 2,9 °C
+acima. A cidade passa a mais fresca por volta das 10h15 e volta a mais quente
+por volta das 19h. A ilha de calor de Lisboa é **noturna**, e nenhum dos dois
+mapas sozinho representa o dia inteiro (Liu et al., 2025).
 
 ## Metodologia (resumo)
 
 - **Temperatura da superfície:** ECOSTRESS `ECO_L2T_LSTE.002`, 70 m, via
   AppEEARS. Controlo de qualidade pelas camadas QC e de nuvens, mais uma
   remoção de nuvens residuais por consistência temporal.
-- **Dia e noite em separado**, pela elevação do sol (dia ≥ 30°, noite < −6°).
-  A ISS passa a horas diferentes em cada dia, por isso os mapas juntam vários
-  anos e a SUHI diurna também é mostrada por hora da passagem.
+- **Dia e madrugada em separado**, pela elevação do sol (dia ≥ 30°, noite
+  < −6°) e, de noite, só as passagens das 0h às 6h, quando a ilha de calor
+  está no seu patamar. A ISS passa a horas diferentes em cada dia, por isso os
+  mapas juntam vários anos e a SUHI diurna também é mostrada por hora da
+  passagem.
+- **Ciclo diário ajustado:** uma sinusoide (a validação cruzada não justifica
+  mais forma) ajustada a todas as passagens, com o intervalo de 90% calculado
+  reamostrando verões inteiros.
 - **SUHI calculada passagem a passagem** (LST menos a mediana da referência
   nessa passagem) e só depois agregada pela mediana. Isto remove grande parte
   do efeito da hora de passagem.
@@ -71,9 +80,12 @@ acima. A ilha de calor de Lisboa é **noturna**.
 - É **temperatura da superfície**, não do ar: num dia de verão o asfalto pode
   estar 10 a 20 °C acima do ar.
 - O dia assenta em 11 passagens de 4 verões, porque a faixa do satélite muitas
-  vezes cobre Lisboa mas não a Lezíria. A noite tem 21 passagens de 7 verões.
+  vezes cobre Lisboa mas não a Lezíria. A madrugada tem 16 passagens de 7
+  verões.
+- Uma passagem (29/06/2024, 02h46) foi excluída: tem nevoeiro sobre a cidade
+  inteira, que o filtro de nuvens não apanha.
 - Com as áreas verdes de Lisboa como referência, o resultado seria o inverso
-  (+2,9 °C de dia, +0,3 °C de noite). A app mostra os dois valores e explica a
+  (+2,9 °C de dia, +0,3 °C de madrugada). A app mostra os dois valores e explica a
   diferença.
 
 ## Créditos

@@ -40,6 +40,8 @@ function initLegend(map) {
     if (position === LEGEND.position) return;
     LEGEND.position = position;
     LEGEND.control.setPosition(position);
+    // setPosition volta a chamar onAdd, que cria a legenda vazia: redesenhar
+    renderLegend(MAP.dataMeta || null);
   });
 }
 

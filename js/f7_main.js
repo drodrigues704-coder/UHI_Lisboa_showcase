@@ -34,8 +34,28 @@ function renderPeriodNote() {
     : inten < 0
       ? ` Lisboa fica ${fmtNumber(-inten, 1)} °C mais fresca do que o campo.`
       : ` Lisboa fica ${fmtNumber(inten, 1)} °C mais quente do que o campo.`;
+  const when = APP_STATE.period === "night" && cat.diurnal ? `, ${nightHoursText(cat.diurnal)}` : "";
   document.getElementById("period-note").textContent =
-    `${p.label}: mediana de ${p.n_scenes} passagens do satélite, ${years}.${vs}`;
+    `${p.label}: mediana de ${p.n_scenes} passagens do satélite${when}, ${years}.${vs}`;
+}
+
+/* "entre a meia-noite e as 6h": janela das passagens do mapa de madrugada (p6). */
+function nightHoursText(d) {
+  const [lo, hi] = d.night_map_local_hours;
+  return `entre ${lo === 0 ? "a meia-noite" : `as ${lo}h`} e as ${hi}h`;
+}
+
+/* "+0,8 °C às 20–22h e +1,4 °C às 22–24h": a subida antes da janela do mapa. */
+function eveningText(d) {
+  const lo = d.night_map_local_hours[0] || 24;
+  const parts = d.bins.filter((b) => b.median !== undefined && b.hour_min >= 20 && b.hour_max <= lo)
+    .map((b) => `${signed(b.median, 1)} °C às ${b.hour_min}–${b.hour_max}h`);
+  return parts.length > 1 ? `${parts.slice(0, -1).join(", ")} e ${parts[parts.length - 1]}` : parts.join("");
+}
+
+/* "1,8 °C abaixo" / "2,0 °C acima" de uma diferença. */
+function aboveBelow(delta) {
+  return `${fmtNumber(Math.abs(delta), 1)} °C ${delta < 0 ? "abaixo" : "acima"}`;
 }
 
 /* Número com sinal explícito: a ilha de calor diurna é negativa e o "+" evita
@@ -82,8 +102,8 @@ function fillCatalogText() {
   const corr = cat.summary.night.elev_correction_k;
   if (corr !== undefined) {
     set("txt-elev-corr", Math.abs(corr) < 0.05
-      ? "Neste caso a correção quase não muda a ilha de calor noturna."
-      : `Sem isto a ilha de calor noturna ficava ${fmtNumber(Math.abs(corr), 1)} °C `
+      ? "Neste caso a correção quase não muda a ilha de calor de madrugada."
+      : `Sem isto a ilha de calor de madrugada ficava ${fmtNumber(Math.abs(corr), 1)} °C `
         + `${corr > 0 ? "abaixo" : "acima"} do real.`);
   }
   set("txt-n-night", String(cat.periods.night.n_scenes));
@@ -96,8 +116,25 @@ function fillCatalogText() {
   set("txt-night-range", suhiRange(cat.summary.night.SUHI_land));
   set("txt-cos-source", cat.parameters.landcover_source);
   if (cat.diurnal) {
-    const n = cat.diurnal.n_scenes_by_period;
-    set("txt-n-transition", String((n.dawn || 0) + (n.dusk || 0)));
+    const d = cat.diurnal;
+    set("txt-n-transition", String(d.n_scenes - d.n_scenes_in_maps));
+    set("txt-night-hours", nightHoursText(d));
+    set("txt-evening", eveningText(d));
+    const f = d.fit;
+    if (f) {
+      set("txt-daily-mean", `${signed(f.daily_mean_k, 1)} °C (provavelmente entre `
+        + `${signed(f.daily_mean_ci_k[0], 1)} e ${signed(f.daily_mean_ci_k[1], 1)} °C)`);
+      // a partir dos valores arredondados que o texto mostra, para a conta fechar
+      const r1 = (v) => Math.round(v * 10) / 10;
+      const offset = (m) => r1(r1(m.suhi_intensity_k_median) - r1(f.daily_mean_k));
+      set("txt-offset-day", aboveBelow(offset(f.maps.day)));
+      set("txt-offset-night", aboveBelow(offset(f.maps.night)));
+    }
+  }
+  const excluded = cat.parameters.excluded_scenes || [];
+  if (excluded.length) {
+    set("txt-excluded", excluded.map((e) => `${e.time_utc.replace("T", " ")} UTC. ${e.reason}`).join(" "));
+    document.getElementById("li-excluded").hidden = false;
   }
   if (cat.parameters.lcz_min_pixels) set("txt-lcz-minpx", fmtNumber(cat.parameters.lcz_min_pixels, 0));
 
@@ -124,7 +161,7 @@ function fillCatalogText() {
   if (dayRef && nightRef && dayRef.inside !== undefined && nightRef.inside !== undefined) {
     set("txt-ref-compare",
       `de dia ${signed(dayRef.inside, 1)} °C em vez de ${signed(dayRef.surrounding, 1)} °C, `
-      + `e de noite ${signed(nightRef.inside, 1)} °C em vez de ${signed(nightRef.surrounding, 1)} °C`);
+      + `e de madrugada ${signed(nightRef.inside, 1)} °C em vez de ${signed(nightRef.surrounding, 1)} °C`);
   }
 }
 
